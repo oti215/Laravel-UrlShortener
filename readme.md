@@ -11,7 +11,7 @@ Using the open-source <a href="https://hashids.org/php/">Hashids</a> PHP library
     <li>Clone into the repository by running this command: git clone https://github.com/oti215/Laravel-UrlShortener.git</li>
     <li>Navigate into the cloned repository</li>
     <li>(NOTE: must set up database before this step, see next section) Run the following command: php artisan serve</li>
-    <li>The app will now be running at http://localhost:8000</li>
+    <li>The app will now be running at http://127.0.0.1:8000</li>
 </ol>
 
 <strong>Database Setup:</strong>
@@ -32,7 +32,7 @@ Using the open-source <a href="https://hashids.org/php/">Hashids</a> PHP library
     <li>Once you have that set up, just run: php artisan migrate</li>
 </ol>
 
-The API has the following endpoints which may be used without authentication:
+<h2>The API has the following endpoints which may be used without authentication:</h2>
 <ol>
     <li>
         Create Short Url
@@ -48,7 +48,7 @@ The API has the following endpoints which may be used without authentication:
         <ul>
             <li>Type: GET</li>
             <li>Path: /api/url/get_most_visited/{rows?} </li>
-            <li><strong>Optional</strong> Query Param: # of rows desired. If ommited, will default to 100 as per requirement.</li>
+            <li><strong>Optional</strong> Query Param: # of rows desired. If omitted, will default to 100 as per requirement.</li>
         </ul>
     </li> 
     <li>
