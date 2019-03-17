@@ -11,22 +11,13 @@ final class UrlRepository {
 
 	public static function createShortUrl( $data ){
 
-		DB::beginTransaction( );
-
 		$url = new Url;
 		$url->original = $data->url;
 		$url->save( );
 
 		$url->hash = Hasher::hash( $url->id );
 
-		if ( $url->save( ) ){
-			DB::commit( );
-		}else{
-			DB::rollback( );
-			return false;
-		}
-
-		return $url;
+		return $url->save( ) ? $url : null;
 	}
 
 	public static function incrementVisits( $urlId ){

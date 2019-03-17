@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Url;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 use App\Helpers\Response;
@@ -14,12 +15,17 @@ class UrlController extends Controller
 	
 	public function createShortUrl( CreateShortUrlRequest $request ){
 
+		DB::beginTransaction( );
+
 		$createdUrl = UrlRepository::createShortUrl( $request );
 
 		if ( $createdUrl ) {
+			DB::commit( );
 			Response::setOk( );
 			Response::addMessage( 'Short url created succesfully' , 'ok' );
 			Response::addParam( 'shortUrl' , env( 'APP_URL' ) . '/' . $createdUrl->hash );
+		}else{
+			DB::rollback( );
 		}
 
 		Response::flush( );
@@ -45,13 +51,18 @@ class UrlController extends Controller
 
 		if ( $url ) {
 
+			DB::beginTransaction( );
+
 			$incrementedVisit = UrlRepository::incrementVisits( $url->id );
 
 			if ( $incrementedVisit ) {
+				DB::commit( );
 				return redirect()->to( $url->original );
 			}else{
+				DB::rollback( );
 				Response::addMessage( 'Error registering visit to this short url, please try again' , 'error' );
 			}
+			
 		}else{
 			Response::addMessage( 'This is not a valid short url!' , 'error' ); 
 		}
