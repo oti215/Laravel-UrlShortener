@@ -32,7 +32,7 @@ Using the open-source <a href="https://hashids.org/php/">Hashids</a> PHP library
     <li>Once you have that set up, just run: php artisan migrate</li>
 </ol>
 
-The API has the following endpoints which may be used without authentication:
+<h2>The API has the following endpoints which may be used without authentication:</h2>
 <ol>
     <li>
         Create Short Url
