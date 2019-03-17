@@ -11,7 +11,7 @@ Using the open-source <a href="https://hashids.org/php/">Hashids</a> PHP library
     <li>Clone into the repository by running this command: git clone https://github.com/oti215/Laravel-UrlShortener.git</li>
     <li>Navigate into the cloned repository</li>
     <li>(NOTE: must set up database before this step, see next section) Run the following command: php artisan serve</li>
-    <li>The app will now be running at http://localhost:8000</li>
+    <li>The app will now be running at http://127.0.0.1:8000</li>
 </ol>
 
 <strong>Database Setup:</strong>
