@@ -2,7 +2,16 @@
 
 This is a Url Shortening API.
 
-Database Setup:
+<strong>Application Setup 1 (php artisan serve):</strong>
+<ol>
+    <li>In your terminal, navigate to an empty folder</li>
+    <li>Clone into the repository by running this command: git clone https://github.com/oti215/Laravel-UrlShortener.git</li>
+    <li>Navigate into the cloned repository</li>
+    <li>Run the following command: php artisan serve</li>
+    <li>The app will now be running at http://localhost:8000</li>
+</ol>
+
+<strong>Database Setup:</strong>
 <ol>
     <li>You may set up the application's database in the server of your choosing</li>
     <li>
@@ -18,15 +27,6 @@ Database Setup:
     </li>
     <li>Remember to create the database with the same name as specified in the .env file</li>
     <li>Once you have that set up, just run: php artisan migrate</li>
-</ol>
-
-Application Setup 1 (php artisan serve):
-<ol>
-    <li>In your terminal, navigate to an empty folder</li>
-    <li>Clone into the repository by running this command: git clone https://github.com/oti215/Laravel-UrlShortener.git</li>
-    <li>Navigate into the cloned repository</li>
-    <li>Run the following command: php artisan serve</li>
-    <li>The app will now be running at http://localhost:8000</li>
 </ol>
 
 The API has the following endpoints which may be used without authentication:
