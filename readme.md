@@ -2,6 +2,9 @@
 
 This is a Url Shortening API.
 
+<strong>How does this API shorten urls?</strong>
+Using the open-source <a href="https://hashids.org/php/">Hashids</a> PHP library, which implements a robust algorithm to obfuscate numbers. I used Hashid to create a unique hash of desired length (6 characters), based on the primary key field of the stored Url, which guarantees we will have a unique hash per each new url. Incoming requests for short urls will simply lookup the hash value. 
+
 <strong>Application Setup 1 (php artisan serve):</strong>
 <ol>
     <li>In your terminal, navigate to an empty folder</li>
