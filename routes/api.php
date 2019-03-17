@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 Route::group( [ 'namespace' => 'Api' ] , function( ) { 
 
 	Route::group( [ 'prefix' => 'url' , 'namespace' => 'Url' ] , function( ) { 
-		Route::get( '/get_most_visited' , 'UrlController@getMostVisited' );
+		Route::get( '/get_most_visited/{rows?}' , 'UrlController@getMostVisited' );
 		Route::post( '/create_short_url' , 'UrlController@createShortUrl' );
 	} );
 

@@ -25,9 +25,9 @@ class UrlController extends Controller
 		Response::flush( );
 	}
     
-	public function getMostVisited( ){
-		
-		$mostVisitedUrls = UrlRepository::getMostVisited( );
+	public function getMostVisited( $rows = null ){
+
+		$mostVisitedUrls = UrlRepository::getMostVisited( $rows );
 
 		if ( count( $mostVisitedUrls ) ) {
 			Response::addParam( 'most_visited' , $mostVisitedUrls );
