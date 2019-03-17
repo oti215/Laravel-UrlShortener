@@ -1,72 +1,62 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
-
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
-
-## About Laravel
-
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1100 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost you and your team's skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 # Laravel-UrlShortener
+
+This is a Url Shortening API.
+
+<strong>How does this API shorten urls?</strong>
+Using the open-source <a href="https://hashids.org/php/">Hashids</a> PHP library, which implements a robust algorithm to obfuscate numbers. I used Hashid to create a unique hash of desired length (6 characters), based on the primary key field of the stored Url, which guarantees we will have a unique hash per each new url. Incoming requests for short urls will simply lookup the hash value. 
+
+<strong>Application Setup 1 (php artisan serve):</strong>
+<ol>
+    <li>In your terminal, navigate to an empty folder</li>
+    <li>Clone into the repository by running this command: git clone https://github.com/oti215/Laravel-UrlShortener.git</li>
+    <li>Navigate into the cloned repository</li>
+    <li>(NOTE: must set up database before this step, see next section) Run the following command: php artisan serve</li>
+    <li>The app will now be running at http://localhost:8000</li>
+</ol>
+
+<strong>Database Setup:</strong>
+<ol>
+    <li>You may set up the application's database in the server of your choosing</li>
+    <li>
+        Be sure to include your database connection information in the .env file
+        <ul>
+            <li>DB_CONNECTION=mysql</li>
+            <li>DB_HOST=127.0.0.1</li>
+            <li>DB_PORT=3306</li>
+            <li>DB_DATABASE=homestead</li>
+            <li>DB_USERNAME=root</li>
+            <li>DB_PASSWORD=root</li>
+        </ul>
+    </li>
+    <li>Remember to create the database with the same name as specified in the .env file</li>
+    <li>Once you have that set up, just run: php artisan migrate</li>
+</ol>
+
+The API has the following endpoints which may be used without authentication:
+<ol>
+    <li>
+        Create Short Url
+        <ul>
+            <li>Type: POST</li>
+            <li>Path: /api/url/create_short_url </li>
+            <li>Form Body: { url: 'valid url string' } </li>
+            <li>Description: This endpoint will create a 6 character hash (using <a href="https://hashids.org/php/">Hashids PHP library</a>) to represent the passed url, it will then append this hash to the API's URL, thus forming a unique short url. You can change the APP_URL variable in the .env.</li>
+        </ul>
+    </li>
+    <li>
+        Get Top Visited Urls
+        <ul>
+            <li>Type: GET</li>
+            <li>Path: /api/url/get_most_visited/{rows?} </li>
+            <li><strong>Optional</strong> Query Param: # of rows desired. If ommited, will default to 100 as per requirement.</li>
+        </ul>
+    </li> 
+    <li>
+        Visit Short Url (redirect to long url)
+        <ul>
+            <li>Type: GET</li>
+            <li>Path: /{hash} </li>
+            <li>Description: This will redirect the user to the stored url for the given hash and increment the amount of visits for this specific short url</li>
+        </ul>
+    </li>
+</ol>
