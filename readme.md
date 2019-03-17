@@ -7,7 +7,7 @@ This is a Url Shortening API.
     <li>In your terminal, navigate to an empty folder</li>
     <li>Clone into the repository by running this command: git clone https://github.com/oti215/Laravel-UrlShortener.git</li>
     <li>Navigate into the cloned repository</li>
-    <li>Run the following command: php artisan serve</li>
+    <li>(NOTE: must set up database before this step, see next section) Run the following command: php artisan serve</li>
     <li>The app will now be running at http://localhost:8000</li>
 </ol>
 
