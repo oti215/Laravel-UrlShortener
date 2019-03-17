@@ -48,7 +48,7 @@ The API has the following endpoints which may be used without authentication:
         <ul>
             <li>Type: GET</li>
             <li>Path: /api/url/get_most_visited/{rows?} </li>
-            <li><strong>Optional</strong> Query Param: # of rows desired. If ommited, will default to 100 as per requirement.</li>
+            <li><strong>Optional</strong> Query Param: # of rows desired. If omitted, will default to 100 as per requirement.</li>
         </ul>
     </li> 
     <li>
