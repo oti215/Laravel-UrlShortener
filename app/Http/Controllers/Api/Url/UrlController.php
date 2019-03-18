@@ -22,7 +22,7 @@ class UrlController extends Controller
 		if ( $createdUrl ) {
 			DB::commit( );
 			Response::setOk( );
-			Response::addMessage( 'Short url created succesfully' , 'ok' );
+			Response::addMessage( 'Short url created succesfully for: ' . $createdUrl->original , 'ok' );
 			Response::addParam( 'shortUrl' , env( 'APP_URL' ) . '/' . $createdUrl->hash );
 		}else{
 			DB::rollback( );
