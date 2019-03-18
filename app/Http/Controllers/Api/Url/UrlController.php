@@ -36,14 +36,14 @@ class UrlController extends Controller
 		$mostVisitedUrls = UrlRepository::getMostVisited( $rows );
 
 		if ( count( $mostVisitedUrls ) ) {
-			Response::addParam( 'most_visited' , $mostVisitedUrls );
+			Response::setOk( );
+ 			Response::addParam( 'most_visited' , $mostVisitedUrls );
 		}else{
 			Response::addMessage( 'There are no visited urls yet!' , 'error' );
 		}
 
 		Response::flush( );
 	}
-
 
 	public function getRedirectToFullUrl( Request $request, $hash ){
 		
@@ -53,16 +53,17 @@ class UrlController extends Controller
 
 			DB::beginTransaction( );
 
-			$incrementedVisit = UrlRepository::incrementVisits( $url->id );
+			$incrementedVisits = UrlRepository::incrementVisits( $url->id );
 
-			if ( $incrementedVisit ) {
+			if ( $incrementedVisits ) {
 				DB::commit( );
+				Response::setOk( ); 
 				return redirect()->to( $url->original );
 			}else{
 				DB::rollback( );
 				Response::addMessage( 'Error registering visit to this short url, please try again' , 'error' );
 			}
-			
+
 		}else{
 			Response::addMessage( 'This is not a valid short url!' , 'error' ); 
 		}

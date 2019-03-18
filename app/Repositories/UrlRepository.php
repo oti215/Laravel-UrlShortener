@@ -2,8 +2,6 @@
 
 namespace App\Repositories;
 
-use Illuminate\Support\Facades\DB;
-
 use App\Core\Hasher;
 use App\Models\Url;
 
@@ -14,7 +12,6 @@ final class UrlRepository {
 		$url = new Url;
 		$url->original = $data->url;
 		$url->save( );
-
 		$url->hash = Hasher::hash( $url->id );
 
 		return $url->save( ) ? $url : null;
