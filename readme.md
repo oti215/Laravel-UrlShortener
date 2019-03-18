@@ -64,6 +64,7 @@ Using the open-source <a href="https://hashids.org/php/">Hashids</a> PHP library
 
 <h3>Response Body</h3>
 Create short url response
+```
 {
     "_META": {
         "status": "ok",
@@ -78,7 +79,9 @@ Create short url response
         "shortUrl": "http://localhost:8000/P3aJ8q"
     }
 }
+```
 Error handling
+```
 {
     "_META": {
         "status": "error",
@@ -91,7 +94,7 @@ Error handling
     },
     "_DATA": []
 }
-
+```
 <h4>API Constraints:</h4>
 <ul>
     <li>Maximum url length is 191 characters</li>
