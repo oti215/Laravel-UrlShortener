@@ -8,17 +8,18 @@ Using the open-source <a href="https://hashids.org/php/">Hashids</a> PHP library
 <strong>Application Setup 1 (php artisan serve):</strong><br>
 <ol>
     <li>In your terminal, navigate to an empty folder</li>
-    <li>Clone into the repository by running this command: git clone https://github.com/oti215/Laravel-UrlShortener.git</li>
+    <li>Clone into the repository by running this command: <strong>git clone</strong> https://github.com/oti215/Laravel-UrlShortener.git</li>
     <li>Navigate into the cloned repository</li>
-    <li>(NOTE: must set up database before this step, see next section) Run the following command: php artisan serve</li>
+    <li>Create and migrate the database, see Database Setup section below</li>
+    <li>Run the following command: php artisan serve</li>
     <li>The app will now be running at http://127.0.0.1:8000</li>
 </ol>
 
 <strong>Database Setup:</strong>
 <ol>
-    <li>You may set up the application's database in the server of your choosing</li>
+    <li>You may set up the application's database in the server of your choosing. I used <a href="https://www.mamp.info/en/">MAMP</a>, which comes prepackaged with MySQL, and hosted my website on a virtual host in Apache.</li>
     <li>
-        Be sure to include your database connection information in the .env file
+        Be sure to include your database connection information in the .env file.
         <ul>
             <li>DB_CONNECTION=mysql</li>
             <li>DB_HOST=127.0.0.1</li>
@@ -29,7 +30,7 @@ Using the open-source <a href="https://hashids.org/php/">Hashids</a> PHP library
         </ul>
     </li>
     <li>Remember to create the database with the same name as specified in the .env file</li>
-    <li>Once you have that set up, just run: php artisan migrate</li>
+    <li>Once you have your credentials and database connection info set up, and your database is created in your database server, just run: <strong>php artisan migrate</strong></li>
 </ol>
 
 <h2>The API has the following endpoints which may be used without authentication:</h2>
@@ -60,3 +61,39 @@ Using the open-source <a href="https://hashids.org/php/">Hashids</a> PHP library
         </ul>
     </li>
 </ol>
+
+<h3>Response Body</h3>
+Create short url response
+{
+    "_META": {
+        "status": "ok",
+        "messages": [
+            {
+                "message": "Short url created succesfully for: https://github.com/oti215/Laravel-UrlShortener",
+                "type": "ok"
+            }
+        ]
+    },
+    "_DATA": {
+        "shortUrl": "http://localhost:8000/P3aJ8q"
+    }
+}
+Error handling
+{
+    "_META": {
+        "status": "error",
+        "messages": [
+            {
+                "message": "We only shorten urls less than or equal to 191 characters!",
+                "type": "error"
+            }
+        ]
+    },
+    "_DATA": []
+}
+
+<h4>API Constraints:</h4>
+<ul>
+    <li>Maximum url length is 191 characters</li>
+    <li>Url <strong>must</strong> have protocol info to be considered valid, for example: https, http.</li>
+</ul>
