@@ -29,7 +29,7 @@ class UrlController extends Controller
 			}
 
 		}catch( Exceptio $e ){
-			
+			Response::addMessage( 'Error creating short URL, please try again' , 'error' );
 		}
 		Response::flush( );
 	}
