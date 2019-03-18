@@ -15,19 +15,22 @@ class UrlController extends Controller
 	
 	public function createShortUrl( CreateShortUrlRequest $request ){
 
-		DB::beginTransaction( );
+		try{
 
-		$createdUrl = UrlRepository::createShortUrl( $request );
+			DB::beginTransaction( );
 
-		if ( $createdUrl ) {
-			DB::commit( );
-			Response::setOk( );
-			Response::addMessage( 'Short url created succesfully for: ' . $createdUrl->original , 'ok' );
-			Response::addParam( 'shortUrl' , env( 'APP_URL' ) . '/' . $createdUrl->hash );
-		}else{
-			DB::rollback( );
+			$createdUrl = UrlRepository::createShortUrl( $request );
+
+			if ( $createdUrl ) {
+				DB::commit( );
+				Response::setOk( );
+				Response::addMessage( 'Short url created succesfully for: ' . $createdUrl->original , 'ok' );
+				Response::addParam( 'shortUrl' , config( 'app.url' ) . '/' . $createdUrl->hash );
+			}
+
+		}catch( Exceptio $e ){
+			
 		}
-
 		Response::flush( );
 	}
     
@@ -51,19 +54,21 @@ class UrlController extends Controller
 
 		if ( $url ) {
 
-			DB::beginTransaction( );
+			try{
 
-			$incrementedVisits = UrlRepository::incrementVisits( $url->id );
+				DB::beginTransaction( );
 
-			if ( $incrementedVisits ) {
-				DB::commit( );
-				Response::setOk( ); 
-				return redirect()->to( $url->original );
-			}else{
-				DB::rollback( );
+				$incrementedVisits = UrlRepository::incrementVisits( $url->id );
+
+				if ( $incrementedVisits ) {
+					DB::commit( );
+					Response::setOk( ); 
+					return redirect()->to( $url->original );
+				}
+
+			}catch( Exception $e ){
 				Response::addMessage( 'Error registering visit to this short url, please try again' , 'error' );
 			}
-
 		}else{
 			Response::addMessage( 'This is not a valid short url!' , 'error' ); 
 		}
